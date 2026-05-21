@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Terril {
+  id          String   @id @default(cuid())
+  nom         String
+  lat         Float
+  lng         Float
+  altitude    Int
+  surface     Float
+  statut      String   @default("FRICHE")
+  score       Float    @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
