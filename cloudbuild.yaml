@@ -1,0 +1,19 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'europe-west1-docker.pkg.dev/$PROJECT_ID/lanazrion-repo/kaleidoland-v3:latest', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-west1-docker.pkg.dev/$PROJECT_ID/lanazrion-repo/kaleidoland-v3:latest']
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'kaleidoland-v3'
+      - '--image'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/lanazrion-repo/kaleidoland-v3:latest'
+      - '--region'
+      - 'europe-west1'
+      - '--service-account'
+      - 'kaleidoland-runtime-sa@$PROJECT_ID.iam.gserviceaccount.com'
+      - '--allow-unauthenticated'
+      - '--update-secrets=OPENAI_API_KEY=OPENAI_API_KEY:latest'

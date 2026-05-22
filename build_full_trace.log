@@ -1,0 +1,13 @@
+  ▲ Next.js 14.2.35
+  - Environments: .env
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./src/app/api/orchestrate/route.ts
+Module not found: Can't resolve '@/lib/ai'
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+> Build failed because of webpack errors

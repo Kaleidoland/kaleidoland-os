@@ -1,15 +1,2 @@
-import type { Metadata } from "next";
-import "./globals.css";
-
-export const metadata: Metadata = {
-  title: "KALEIDOLAND — Orbital OS",
-  description: "AI-native interstellar operating system",
-};
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <body className="antialiased bg-black text-white">{children}</body>
-    </html>
-  );
-}
+export const metadata = { title: 'KALEIDOLAND OS' }
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="fr"><body style={{margin:0,background:'#000',color:'#fff',fontFamily:'system-ui'}}>{children}</body></html>}

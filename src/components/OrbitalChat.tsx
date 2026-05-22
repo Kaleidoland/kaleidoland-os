@@ -1,13 +1,3 @@
 'use client'
-import { useChat } from 'ai/react'
-import { useState } from 'react'
-export default function OrbitalChat(){
- const [open,setOpen]=useState(false)
- const {messages,input,handleInputChange,handleSubmit}=useChat({api:'/api/chat'})
- if(!open) return <button onClick={()=>setOpen(true)} className="fixed bottom-6 right-6 px-4 py-2 bg-violet-600 rounded-full">ORBITAL CHAT</button>
- return <div className="fixed bottom-6 right-6 w-80 h-96 bg-black/80 backdrop-blur border border-white/10 rounded-2xl flex flex-col">
-  <div className="p-3 border-b border-white/10 flex justify-between"><span>ORBITAL</span><button onClick={()=>setOpen(false)}>×</button></div>
-  <div className="flex-1 overflow-auto p-3 space-y-2 text-sm">{messages.map(m=><div key={m.id} className={m.role==='user'?'text-right':''}>{m.content}</div>)}</div>
-  <form onSubmit={handleSubmit} className="p-2 border-t border-white/10"><input value={input} onChange={handleInputChange} placeholder="Ask ORBITAL..." className="w-full bg-transparent outline-none text-sm"/></form>
- </div>
-}
+import {useChat} from 'ai/react'
+export default function OrbitalChat(){const{ messages,input,handleInputChange,handleSubmit}=useChat({api:'/api/orchestrate'});return<div style={{position:'fixed',bottom:24,right:24,width:360,background:'rgba(0,0,0,.75)',backdropFilter:'blur(12px)',border:'1px solid #333',borderRadius:16,padding:12}}><div style={{height:240,overflow:'auto',fontSize:14,marginBottom:8}}>{messages.map(m=><div key={m.id} style={{textAlign:m.role==='user'?'right':'left',margin:'6px 0'}}><span style={{background:'#222',padding:'6px 10px',borderRadius:8,display:'inline-block'}}>{m.content}</span></div>)}</div><form onSubmit={handleSubmit} style={{display:'flex',gap:6}}><input value={input} onChange={handleInputChange} placeholder="Commande orbitale..." style={{flex:1,background:'#111',border:'1px solid #333',borderRadius:8,padding:'8px',color:'#fff'}}/><button style={{background:'#7c3aed',border:0,borderRadius:8,padding:'0 12px',color:'#fff'}}>→</button></form></div>}

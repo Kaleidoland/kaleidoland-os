@@ -1,25 +1,14 @@
-import { NextResponse } from 'next/server';
-import { MODELS } from '@/lib/ai';
-
-const SPOC = 'clement@kaleidoland.fr';
-
-export async function GET() {
-  return NextResponse.json({ 
-    status: 'ORCHESTRATOR_READY',
-    spoc: SPOC,
-    models: MODELS,
-    ts: Date.now()
-  });
-}
-
-export async function POST(req: Request) {
-  const { prompt = 'test' } = await req.json();
-  return NextResponse.json({
-    spoc: SPOC,
-    prompt,
-    meta: { model: MODELS.meta, status: 'ready' },
-    openai: { model: MODELS.openai, status: 'ready' },
-    gemini: { model: MODELS.gemini, status: 'ready' },
-    consensus: 'ORBITAL_EXPANSION_POSITIVE'
-  });
+import OpenAI from 'openai';
+import { NextRequest, NextResponse } from 'next/server';
+export const runtime = 'nodejs';
+const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+export async function POST(req: NextRequest) {
+  try {
+    const { prompt } = await req.json();
+    const completion = await client.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [{ role: 'system', content: 'K-OS Sovereign Engine via Vertex/Gemini Nexus.' }, { role: 'user', content: prompt }],
+    });
+    return NextResponse.json({ content: completion.choices[0].message.content });
+  } catch (e: any) { return NextResponse.json({ error: e.message }, { status: 500 }); }
 }
