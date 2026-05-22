@@ -1,14 +1,17 @@
-import OpenAI from 'openai';
-import { NextRequest, NextResponse } from 'next/server';
-export const runtime = 'nodejs';
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-export async function POST(req: NextRequest) {
-  try {
-    const { prompt } = await req.json();
-    const completion = await client.chat.completions.create({
-      model: 'gpt-4o-mini',
-      messages: [{ role: 'system', content: 'K-OS Sovereign Engine via Vertex/Gemini Nexus.' }, { role: 'user', content: prompt }],
-    });
-    return NextResponse.json({ content: completion.choices[0].message.content });
-  } catch (e: any) { return NextResponse.json({ error: e.message }, { status: 500 }); }
+import { getOpenAI } from "@/lib/openai"
+
+export async function POST(req: Request) {
+  const openai = getOpenAI()
+
+  const body = await req.json().catch(() => ({}))
+
+  const response = await openai.chat.completions.create({
+    model: "gpt-4o-mini",
+    messages: [
+      { role: "system", content: "You are Kaleidoland OS" },
+      { role: "user", content: body?.prompt || "hello" }
+    ]
+  })
+
+  return Response.json(response)
 }
