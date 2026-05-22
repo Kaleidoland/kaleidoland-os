@@ -1,2 +1,5 @@
-import React from 'react'
-export default function OrbitalField() { return <div className="hidden">3D Engine Offline</div> }
+import type { JSX } from 'react'
+
+export default function OrbitalField(): JSX.Element {
+  return <div className="hidden">3D Engine Offline</div>
+}

@@ -1,3 +1,15 @@
 𓂀 DÉBUT GAV 60MIN Fri May 22 02:52:55 PM UTC 2026 𓂀
 === ITÉRATION 1/20 - Fri May 22 02:52:55 PM UTC 2026 ===
 PNPM DETECTÉ
+DEPLOY TENTATIVE 1
+Building using Dockerfile and deploying container to Cloud Run service [kaleidoland-core] in project [lanazrion-os-core] region [europe-west1]
+Building and deploying...
+Validating configuration..........done
+Uploading sources........done
+Building Container...........................................................................................................................................................................................................................................................................................failed
+Deployment failed
+ERROR: (gcloud.run.deploy) Build failed; check build logs for details
+𓂀 SUCCESS ITÉRATION 1 𓂀
+https://kaleidoland-core-lpmhkbbnya-ew.a.run.app
+GAV TERMINÉE AVANT 60MIN
+𓂀 FIN GAV 60MIN Fri May 22 02:53:35 PM UTC 2026 𓂀
